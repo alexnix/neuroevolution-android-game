@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/m5" android:tag="5" android:title="5 Minutes" />
+    <item android:id="@+id/m10" android:tag="10" android:title="10 Minutes"/>
+    <item android:id="@+id/m15" android:tag="15" android:title="15 Minutes"/>
+    <item android:id="@+id/m30" android:tag="30" android:title="30 Minutes"/>
+    <item android:id="@+id/h1" android:tag="60" android:title="1 Hour"/>
+</menu>

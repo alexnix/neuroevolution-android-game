@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BT_TO_PC</string>
+    <string name="title_activity_lamp_remote_">LampRemote_Activity</string>
+    <string name="deffault_device">default_device_key_for_shared_preferences</string>
+</resources>
