@@ -23,8 +23,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void control_automat(View view) {
-        Intent i = new Intent(this, ManualControlActivity.class);
-        i.putExtra(NEXT_ACTIVITY, MANUAL_CONTROL_ACTIVITY);
+        Intent i = new Intent(this, AutoControlActivity.class);
+        i.putExtra(NEXT_ACTIVITY, AUTO_CONTROL_ACTIVITY);
         startActivity(i);
     }
 
