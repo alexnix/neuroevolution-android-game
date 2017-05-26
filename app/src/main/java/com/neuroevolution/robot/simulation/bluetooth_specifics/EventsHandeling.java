@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 
-import com.neuroevolution.robot.simulation.ControlsActivity;
+import com.neuroevolution.robot.simulation.ManualControlActivity;
 import com.neuroevolution.robot.simulation.DeviceList_Activity;
-import com.neuroevolution.robot.simulation.MyApplication;
+import com.neuroevolution.robot.simulation.core.MyApplication;
 
 public class EventsHandeling extends android.os.Handler {
 
@@ -35,7 +35,7 @@ public class EventsHandeling extends android.os.Handler {
                 MyApplication app = (MyApplication) activity.getApplicationContext();
                 app.setCom((CommunicationThread)msg.obj);
 
-                Intent i = new Intent(activity, ControlsActivity.class);
+                Intent i = new Intent(activity, ManualControlActivity.class);
                 activity.startActivity(i);
                 this.activity.finish();
                 break;

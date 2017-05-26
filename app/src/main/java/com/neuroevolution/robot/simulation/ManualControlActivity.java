@@ -9,10 +9,11 @@ import android.widget.Button;
 
 import com.erz.joysticklibrary.JoyStick;
 import com.neuroevolution.robot.simulation.bluetooth_specifics.CommunicationThread;
+import com.neuroevolution.robot.simulation.core.MyApplication;
 
 import java.io.IOException;
 
-public class ControlsActivity extends AppCompatActivity implements JoyStick.JoyStickListener {
+public class ManualControlActivity extends AppCompatActivity implements JoyStick.JoyStickListener {
 
     private CommunicationThread com;
     private double[][] m = {
