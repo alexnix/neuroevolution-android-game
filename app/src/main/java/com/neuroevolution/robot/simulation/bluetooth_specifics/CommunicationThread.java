@@ -1,4 +1,4 @@
-package com.example.m17336.bt_to_pc.bluetooth_specifics;
+package com.neuroevolution.robot.simulation.bluetooth_specifics;
 
 import android.bluetooth.BluetoothSocket;
 
@@ -7,11 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.Serializable;
 
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 public class CommunicationThread extends Thread {
     public BluetoothSocket socket;

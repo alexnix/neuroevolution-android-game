@@ -1,11 +1,10 @@
-package com.example.m17336.bt_to_pc;
+package com.neuroevolution.robot.simulation;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,20 +12,17 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
-import android.support.design.widget.Snackbar;
-import android.widget.Toast;
 
-import com.example.m17336.bt_to_pc.bluetooth_specifics.ConnectThread;
-import com.example.m17336.bt_to_pc.bluetooth_specifics.EventsHandeling;
+import android.support.design.widget.Snackbar;
+
+import com.neuroevolution.robot.simulation.bluetooth_specifics.ConnectThread;
+import com.neuroevolution.robot.simulation.bluetooth_specifics.EventsHandeling;
 
 public class DeviceList_Activity extends AppCompatActivity {
 

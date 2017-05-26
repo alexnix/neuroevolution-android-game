@@ -1,8 +1,8 @@
-package com.example.m17336.bt_to_pc;
+package com.neuroevolution.robot.simulation;
 
 import android.app.Application;
 
-import com.example.m17336.bt_to_pc.bluetooth_specifics.CommunicationThread;
+import com.neuroevolution.robot.simulation.bluetooth_specifics.CommunicationThread;
 
 /**
  * Created by m17336 on 2/12/2016.

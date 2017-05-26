@@ -1,8 +1,7 @@
-package com.example.m17336.bt_to_pc;
+package com.neuroevolution.robot.simulation;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 public class CanvasActivity extends AppCompatActivity {

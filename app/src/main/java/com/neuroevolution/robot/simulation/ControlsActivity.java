@@ -1,4 +1,4 @@
-package com.example.m17336.bt_to_pc;
+package com.neuroevolution.robot.simulation;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,10 +6,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.erz.joysticklibrary.JoyStick;
-import com.example.m17336.bt_to_pc.bluetooth_specifics.CommunicationThread;
+import com.neuroevolution.robot.simulation.bluetooth_specifics.CommunicationThread;
 
 import java.io.IOException;
 

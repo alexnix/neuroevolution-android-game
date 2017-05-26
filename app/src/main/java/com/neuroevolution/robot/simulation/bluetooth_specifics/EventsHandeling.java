@@ -1,13 +1,13 @@
-package com.example.m17336.bt_to_pc.bluetooth_specifics;
+package com.neuroevolution.robot.simulation.bluetooth_specifics;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 
-import com.example.m17336.bt_to_pc.ControlsActivity;
-import com.example.m17336.bt_to_pc.DeviceList_Activity;
-import com.example.m17336.bt_to_pc.MyApplication;
+import com.neuroevolution.robot.simulation.ControlsActivity;
+import com.neuroevolution.robot.simulation.DeviceList_Activity;
+import com.neuroevolution.robot.simulation.MyApplication;
 
 public class EventsHandeling extends android.os.Handler {
 

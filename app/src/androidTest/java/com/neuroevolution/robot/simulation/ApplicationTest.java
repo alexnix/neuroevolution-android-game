@@ -1,4 +1,4 @@
-package com.example.m17336.bt_to_pc;
+package com.neuroevolution.robot.simulation;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

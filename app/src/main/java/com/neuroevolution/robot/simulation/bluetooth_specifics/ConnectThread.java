@@ -1,4 +1,4 @@
-package com.example.m17336.bt_to_pc.bluetooth_specifics;
+package com.neuroevolution.robot.simulation.bluetooth_specifics;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -6,9 +6,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.UUID;
 
 
 public class ConnectThread extends Thread {
