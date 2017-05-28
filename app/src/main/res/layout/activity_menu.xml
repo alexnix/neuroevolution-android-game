@@ -11,69 +11,76 @@
     android:background="@drawable/bgpattern"
     tools:context="com.neuroevolution.robot.simulation.MenuActivity">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:src="@drawable/robot"
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
-
     <LinearLayout
-        android:layout_below="@id/logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/logo"
+            android:src="@drawable/robot"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
 
         <LinearLayout
-            android:onClick="antreneaza"
+            android:layout_below="@id/logo"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="20dp"
-            android:background="@drawable/glossy_btn"
-            android:gravity="center"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Antreneaza"
-                android:textColor="#fff"
-                android:textSize="20dp"/>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <LinearLayout
-            android:onClick="control_automat"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="20dp"
-            android:background="@drawable/glossy_btn"
-            android:gravity="center"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Control Automat"
-                android:textColor="#fff"
-                android:textSize="20dp"/>
-        </LinearLayout>
+            <LinearLayout
+                android:onClick="antreneaza"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:padding="20dp"
+                android:background="@drawable/glossy_btn"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Antreneaza"
+                    android:textColor="#fff"
+                    android:textSize="20dp"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:onClick="control_manual"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:padding="20dp"
-            android:background="@drawable/glossy_btn"
-            android:gravity="center"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Control Manual"
-                android:textColor="#fff"
-                android:textSize="20dp"/>
+            <LinearLayout
+                android:onClick="control_automat"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:padding="20dp"
+                android:background="@drawable/glossy_btn"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Control Automat"
+                    android:textColor="#fff"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:onClick="control_manual"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:padding="20dp"
+                android:background="@drawable/glossy_btn"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Control Manual"
+                    android:textColor="#fff"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

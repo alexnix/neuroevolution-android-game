@@ -6,74 +6,44 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.FrameLayout;
 
-public class AutoControlActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+import com.neuroevolution.robot.simulation.core.CameraPreview;
 
-    Camera camera;
-    SurfaceView surfaceView;
-    SurfaceHolder surfaceHolder;
-    private String tag = "AutoControll";
+public class AutoControlActivity extends AppCompatActivity  {
+
+    private Camera mCamera;
+    private CameraPreview mPreview;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auto_control);
 
-        surfaceView = (SurfaceView)findViewById(R.id.surfaceView);
-        surfaceHolder = surfaceView.getHolder();
-        surfaceHolder.addCallback(this);
-        surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        // Create an instance of Camera
+        mCamera = getCameraInstance();
 
-        start_camera();
+        // Create our Preview view and set it as the content of our activity.
+        mPreview = new CameraPreview(this, mCamera);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
     }
 
-    private void start_camera()
-    {
-        try{
-            camera = Camera.open();
-        }catch(RuntimeException e){
-            Log.e(tag, "init_camera: " + e);
-            return;
-        }
-        Camera.Parameters param;
-        param = camera.getParameters();
-        //modify parameter
-        param.setPreviewFrameRate(20);
-        param.setPreviewSize(176, 144);
-        camera.setParameters(param);
+    /** A safe way to get an instance of the Camera object. */
+    public static Camera getCameraInstance(){
+        Camera c = null;
         try {
-            camera.setPreviewDisplay(surfaceHolder);
-            camera.startPreview();
-            //camera.takePicture(shutter, raw, jpeg)
-        } catch (Exception e) {
-            Log.e(tag, "init_camera: " + e);
-            return;
+            c = Camera.open(); // attempt to get a Camera instance
         }
-    }
-
-    private void stop_camera() {
-        camera.stopPreview();
-        camera.release();
+        catch (Exception e){
+            // Camera is not available (in use or does not exist)
+        }
+        return c; // returns null if camera is unavailable
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        stop_camera();
-    }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder surfaceHolder) {
-
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+        mCamera.release();
     }
 }
