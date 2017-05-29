@@ -21,6 +21,6 @@ public class TrainingActivity extends AppCompatActivity {
         wv.getSettings().setUseWideViewPort(true);
         wv.setWebChromeClient(new WebChromeClient());
 
-        wv.loadUrl("file:///android_asset/webview/index.html");
+        wv.loadUrl("file:///android_asset/webview/web-view-content.html");
     }
 }

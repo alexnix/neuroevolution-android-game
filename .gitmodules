@@ -1,0 +1,3 @@
+[submodule "app/src/main/assets/webview"]
+	path = app/src/main/assets/webview
+	url = https://github.com/alexnix/3wheel-robot-simulation.git
