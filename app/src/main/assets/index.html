@@ -1,11 +1,79 @@
-<canvas id="canvas" style="height:100%;width:100%;"></canvas>
-<script src = "Neuroevolution.js"></script>
-<script src = "jquery.min.js"></script>
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+    <script>
 
+var p1;
+var p2;
 
+function init(){
+ p1 = document.getElementById('p1');
+ p2 = document.getElementById('p2');
+ p1.innerHTML=navigator.userAgent;
+ var canvas = document.getElementById('myCanvas');
+ var canvasOffsetX = canvas.getBoundingClientRect().left;
+ var canvasOffsetY = canvas.getBoundingClientRect().top;
 
-<script>
-    $(document).ready(function(){
-        $("canvas").height( $(window).height() - 15);
-    })
+ canvas.width = window.innerWidth - (2 * canvasOffsetX);
+ canvas.height = window.innerHeight - canvasOffsetY - 100;
+ canvas.fillStyle="#a0a0a0";
+
+ canvas.addEventListener('touchstart', touchstartListener, false);
+ canvas.addEventListener('touchmove', touchmoveListener, false);
+ canvas.addEventListener('touchend', touchendListener, false);
+ canvas.addEventListener('touchenter', touchenterListener, false);
+ canvas.addEventListener('touchleave', touchleaveListener, false);
+ canvas.addEventListener('touchcancel', touchcancelListener, false);
+
+}
+
+function touchstartListener(event){
+ p2.innerHTML= "touchstart - <br/>"
+  + event.changedTouches[0].pageX + ":" + event.changedTouches[0].pageY;
+ event.preventDefault();
+}
+
+function touchmoveListener(event){
+ p2.innerHTML= "touchmove - <br/>"
+  + event.changedTouches[0].pageX + ":" + event.changedTouches[0].pageY;
+ event.preventDefault();
+}
+
+function touchendListener(event){
+ p2.innerHTML= "touchend - <br/>"
+  + event.changedTouches[0].pageX + ":" + event.changedTouches[0].pageY;
+ event.preventDefault();
+}
+
+function touchenterListener(event){
+ p2.innerHTML= "touchenter - <br/>"
+  + event.changedTouches[0].pageX + ":" + event.changedTouches[0].pageY;
+ event.preventDefault();
+}
+
+function touchleaveListener(event){
+ p2.innerHTML= "touchleave - <br/>"
+  + event.changedTouches[0].pageX + ":" + event.changedTouches[0].pageY;
+ event.preventDefault();
+}
+
+function touchcancelListener(event){
+ p2.innerHTML= "touchcancel - <br/>"
+  + event.changedTouches[0].pageX + ":" + event.changedTouches[0].pageY;
+ event.preventDefault();
+}
+
 </script>
+</HEAD>
+<BODY onload="init()" style="border:5px solid #000000;">
+
+<p id='p1'>un-init</p>
+
+<canvas id='myCanvas' style="border:1px solid #FF0000;">
+    Canvas not support!
+</canvas>
+
+<p id='p2'></p>
+
+</BODY>
+</HTML>

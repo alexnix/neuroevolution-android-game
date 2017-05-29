@@ -10,10 +10,11 @@ import android.widget.FrameLayout;
 
 import com.neuroevolution.robot.simulation.core.CameraPreview;
 
-public class AutoControlActivity extends AppCompatActivity  {
+public class AutoControlActivity extends AppCompatActivity implements Camera.PreviewCallback {
 
     private Camera mCamera;
     private CameraPreview mPreview;
+    private int width, height;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,13 @@ public class AutoControlActivity extends AppCompatActivity  {
         // Create an instance of Camera
         mCamera = getCameraInstance();
 
+        mCamera.setPreviewCallback(this);
+
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        width = preview.getWidth();
+        height = preview.getHeight();
         preview.addView(mPreview);
     }
 
@@ -45,5 +50,10 @@ public class AutoControlActivity extends AppCompatActivity  {
     protected void onStop() {
         super.onStop();
         mCamera.release();
+    }
+
+    @Override
+    public void onPreviewFrame(byte[] bytes, Camera camera) {
+        Log.d("data", "have");
     }
 }
