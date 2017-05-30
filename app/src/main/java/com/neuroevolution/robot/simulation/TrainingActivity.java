@@ -23,4 +23,5 @@ public class TrainingActivity extends AppCompatActivity {
 
         wv.loadUrl("file:///android_asset/webview/web-view-content.html");
     }
+
 }
