@@ -59,12 +59,53 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
         int rgb[] = new int[mWidth * mHeight];
         YUV_NV21_TO_RGB(rgb, bytes, mWidth, mHeight);
 
-        for( int i = 0; i < mHeight; i++)
-            for(int j = 0; j < mWidth; j++) {
+        int i, j;
+        float max = 0;
+        filtering:
+        for( i = 1; i < mHeight - 1; i++) {
+            for ( j = 1; j < mWidth - 1; j++) {
+                int sumR = ((rgb[(i) * mWidth + (j)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i - 1) * mWidth + (j)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i + 1) * mWidth + (j)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i) * mWidth + (j - 1)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i) * mWidth + (j + 1)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i - 1) * mWidth + (j + 1)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i + 1) * mWidth + (j - 1)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i - 1) * mWidth + (j - 1)] & 0x00FF0000) >> 16) +
+                        ((rgb[(i + 1) * mWidth + (j + 1)] & 0x00FF0000) >> 16);
 
-                int elem = rgb[i*mWidth + j];
+                int sumG = ((rgb[(i) * mWidth + (j)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i - 1) * mWidth + (j)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i + 1) * mWidth + (j)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i) * mWidth + (j - 1)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i) * mWidth + (j + 1)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i - 1) * mWidth + (j + 1)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i + 1) * mWidth + (j - 1)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i - 1) * mWidth + (j - 1)] & 0x0000ff00) >> 8) +
+                        ((rgb[(i + 1) * mWidth + (j + 1)] & 0x0000ff00) >> 8);
 
+                int sumB = ((rgb[(i) * mWidth + (j)] & 0x000000ff)) +
+                        ((rgb[(i - 1) * mWidth + (j)] & 0x000000ff)) +
+                        ((rgb[(i + 1) * mWidth + (j)] & 0x000000ff)) +
+                        ((rgb[(i) * mWidth + (j - 1)] & 0x000000ff)) +
+                        ((rgb[(i) * mWidth + (j + 1)] & 0x000000ff)) +
+                        ((rgb[(i - 1) * mWidth + (j + 1)] & 0x000000ff)) +
+                        ((rgb[(i + 1) * mWidth + (j - 1)] & 0x000000ff)) +
+                        ((rgb[(i - 1) * mWidth + (j - 1)] & 0x000000ff)) +
+                        ((rgb[(i + 1) * mWidth + (j + 1)] & 0x000000ff));
+
+                float rap = (float) sumR / (sumG + sumB + 1);
+                if(rap > max) max = rap;
+//                if (rap >= 1) {
+//                    Log.wtf("WORKS", i + " " + j);
+//                    break filtering;
+//                }
             }
+        }
+
+        Log.d("WORKS", "max: " + max);
+
+
     }
 
     // YUV_NV21 to RGB by Cheok Yan Cheng
