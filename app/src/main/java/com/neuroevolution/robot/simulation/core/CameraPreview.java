@@ -10,12 +10,15 @@ import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 
+// Inspired from https://developer.android.com/guide/topics/media/camera.html
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    private Context context;
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
+        this.context = context;
         mCamera = camera;
 
         // Install a SurfaceHolder.Callback so we get notified when the
@@ -62,6 +65,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // start preview with new settings
         try {
             mCamera.setPreviewDisplay(mHolder);
+            mCamera.setPreviewCallback((Camera.PreviewCallback) context);
             mCamera.startPreview();
 
         } catch (Exception e){

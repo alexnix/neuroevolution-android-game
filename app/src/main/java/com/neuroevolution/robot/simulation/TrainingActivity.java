@@ -11,8 +11,8 @@ import com.mukesh.tinydb.TinyDB;
 
 public class TrainingActivity extends AppCompatActivity {
 
-    private static final String BEST_ROBOT = "best_robot_in_current_generation";
-    private static final String GENERATION = "generation_Stringified";
+    public static final String BEST_ROBOT = "best_robot_in_current_generation";
+    public static final String GENERATION = "generation_Stringified";
     private TinyDB db;
 
     @Override
@@ -31,6 +31,8 @@ public class TrainingActivity extends AppCompatActivity {
         wv.loadUrl("file:///android_asset/webview/web-view-content.html");
 
         db = new TinyDB(this);
+
+        Log.d("sp_data", restoreGeneration());
     }
 
     @JavascriptInterface
