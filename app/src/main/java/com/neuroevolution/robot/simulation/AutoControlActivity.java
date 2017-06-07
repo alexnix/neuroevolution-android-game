@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.neuroevolution.robot.simulation.core.CameraPreview;
 
@@ -16,14 +17,21 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
 
     private Camera mCamera;
     private CameraPreview mPreview;
+    private TextView tv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auto_control);
 
+        tv = (TextView) findViewById(R.id.display);
+
         // Create an instance of Camera
         mCamera = getCameraInstance();
+
+        Camera.Parameters camParams = mCamera.getParameters();
+        camParams.set("iso", "100");
+        mCamera.setParameters(camParams);
 
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
@@ -59,7 +67,7 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
         int rgb[] = new int[mWidth * mHeight];
         YUV_NV21_TO_RGB(rgb, bytes, mWidth, mHeight);
 
-        int i, j;
+        int i, j, sum, sum_max = 0, max_i = 0, max_j =0;
         float max = 0;
         filtering:
         for( i = 1; i < mHeight - 1; i++) {
@@ -94,17 +102,19 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
                         ((rgb[(i - 1) * mWidth + (j - 1)] & 0x000000ff)) +
                         ((rgb[(i + 1) * mWidth + (j + 1)] & 0x000000ff));
 
-                float rap = (float) sumR / (sumG + sumB + 1);
-                if(rap > max) max = rap;
-//                if (rap >= 1) {
-//                    Log.wtf("WORKS", i + " " + j);
-//                    break filtering;
-//                }
+                sum = sumR + sumB + sumG;
+                if(sum > sum_max)
+                {
+                    sum_max = sum;
+                    max_i = i;
+                    max_j = j;
+                }
+//
             }
         }
 
         Log.d("WORKS", "max: " + max);
-
+        tv.setText(String.valueOf(max_i + " : " + max_j));
 
     }
 
