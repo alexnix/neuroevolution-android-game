@@ -2,11 +2,13 @@ package com.neuroevolution.robot.simulation;
 
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.webkit.JavascriptInterface;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -148,4 +150,15 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
             }
         }
     }
+
+    @JavascriptInterface
+    public void noTrainedNetwork() {
+        finish();
+    }
+
+    @JavascriptInterface
+    public void move(int ax, int ay) {
+
+    }
+
 }
