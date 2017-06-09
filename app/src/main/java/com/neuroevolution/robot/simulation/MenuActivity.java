@@ -13,9 +13,9 @@ import com.mukesh.tinydb.TinyDB;
 
 public class MenuActivity extends AppCompatActivity {
 
-    public static String NEXT_ACTIVITY = "next_activity";
-    public static int MANUAL_CONTROL_ACTIVITY = 0;
-    public static int AUTO_CONTROL_ACTIVITY = 1;
+    public static final String NEXT_ACTIVITY = "next_activity";
+    public static final int MANUAL_CONTROL_ACTIVITY = 0;
+    public static final int AUTO_CONTROL_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void control_automat(View view) {
-        Intent i = new Intent(this, AutoControlActivity.class);
+        Intent i = new Intent(this, DeviceList_Activity.class);
         i.putExtra(NEXT_ACTIVITY, AUTO_CONTROL_ACTIVITY);
         startActivity(i);
     }

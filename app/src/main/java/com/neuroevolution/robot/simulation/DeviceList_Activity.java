@@ -20,6 +20,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import android.support.design.widget.Snackbar;
+import android.widget.Toast;
 
 import com.neuroevolution.robot.simulation.bluetooth_specifics.ConnectThread;
 import com.neuroevolution.robot.simulation.bluetooth_specifics.EventsHandeling;
@@ -44,6 +45,12 @@ public class DeviceList_Activity extends AppCompatActivity {
         discover();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+    }
+
     public void discover() {
         mArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.device_list_item, R.id.text1);
         list_init();
@@ -63,9 +70,9 @@ public class DeviceList_Activity extends AppCompatActivity {
                 }
             }
         };
-        // Register the BroadcastReceiver
+
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+        registerReceiver(mReceiver, filter);
     }
 
     @Override
@@ -84,7 +91,6 @@ public class DeviceList_Activity extends AppCompatActivity {
     }
 
     private void list_init() {
-        final Activity that = this;
         ListView lv = (ListView) findViewById(R.id.bt_devices);
         lv.setAdapter(mArrayAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,12 +101,11 @@ public class DeviceList_Activity extends AppCompatActivity {
                 Snackbar snackbar = Snackbar
                         .make(view, "Welcome", Snackbar.LENGTH_LONG);
 
-                ProgressDialog dialog = ProgressDialog.show(DeviceList_Activity.this, "",
-                        "Connecting. Please wait...", true);
+                Toast.makeText(DeviceList_Activity.this, "Connecting, please wait...", Toast.LENGTH_LONG).show();
 
                 mBluetoothAdapter.cancelDiscovery();
 
-                ConnectThread con = new ConnectThread(device, new EventsHandeling(snackbar, that));
+                ConnectThread con = new ConnectThread(device, new EventsHandeling(snackbar, DeviceList_Activity.this));
                 con.start();
 
             }
@@ -113,5 +118,24 @@ public class DeviceList_Activity extends AppCompatActivity {
         if( requestCode == REQUEST_ENABLE_BT )
             mBluetoothAdapter.startDiscovery();
 
+    }
+
+    public void startNextActivity(View view) {
+        Intent originating_intent = getIntent();
+        Intent i;
+        switch (originating_intent.getIntExtra(MenuActivity.NEXT_ACTIVITY, 0)) {
+            case MenuActivity.MANUAL_CONTROL_ACTIVITY:
+                i = new Intent(this, ManualControlActivity.class);
+                break;
+            case MenuActivity.AUTO_CONTROL_ACTIVITY:
+                i = new Intent(this, AutoControlActivity.class);
+                break;
+            default:
+                i = new Intent(this, ManualControlActivity.class);
+                break;
+        }
+
+        startActivity(i);
+        finish();
     }
 }

@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 
+import com.neuroevolution.robot.simulation.AutoControlActivity;
 import com.neuroevolution.robot.simulation.ManualControlActivity;
 import com.neuroevolution.robot.simulation.DeviceList_Activity;
+import com.neuroevolution.robot.simulation.MenuActivity;
 import com.neuroevolution.robot.simulation.core.MyApplication;
 
 public class EventsHandeling extends android.os.Handler {
@@ -17,9 +19,9 @@ public class EventsHandeling extends android.os.Handler {
     public static final int ERROR_OBTAIN_STREAMS = 6;
 
     private Snackbar snackbar;
-    private Activity activity;
+    DeviceList_Activity activity;
 
-    public EventsHandeling(Snackbar snackbar, Activity activity){
+    public EventsHandeling(Snackbar snackbar, DeviceList_Activity activity){
         this.snackbar = snackbar;
         this.activity = activity;
     }
@@ -35,9 +37,7 @@ public class EventsHandeling extends android.os.Handler {
                 MyApplication app = (MyApplication) activity.getApplicationContext();
                 app.setCom((CommunicationThread)msg.obj);
 
-                Intent i = new Intent(activity, ManualControlActivity.class);
-                activity.startActivity(i);
-                this.activity.finish();
+                activity.startNextActivity(null);
                 break;
             }
 

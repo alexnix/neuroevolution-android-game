@@ -23,6 +23,8 @@ public class TrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canvas_activity);
 
+        db = new TinyDB(this);
+
         WebView wv;
         wv = (WebView) findViewById(R.id.wv1);
 

@@ -29,6 +29,24 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
         return f;
     }
 
+    private String command(double[] f) {
+        f[0] = 255/0.68 * f[0];
+        f[1] = 255/0.68 * f[1];
+        f[2] = 255/0.68 * f[2];
+
+        String command = String.format("%c%03d %c%03d %c%03d",
+                f[0] >= 0 ? '+' : '-',
+                (int)Math.round(Math.abs(f[0])),
+
+                f[1] >= 0 ? '+' : '-',
+                (int)Math.round(Math.abs(f[1])),
+
+                f[2] >= 0 ? '+' : '-',
+                (int)Math.round(Math.abs(f[2])));
+
+        return  command;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,23 +160,17 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
 
     @Override
     public void onMove(JoyStick joyStick, double angle, double power, int direction) {
-//        if(angle < 0)
-//            angle = Math.PI + Math.abs(angle);
-//        else
-//            angle = Math.abs(Math.PI - angle);
-//        double f[] = f(Math.cos(angle), Math.sin(angle));
-//
-//        String command = String.format("%c%02d %c%02d %c%02d", f[0]*power > 0 ? '+' : '-',
-//                (int)Math.round(Math.abs(f[0]*power)),
-//                f[1]*power > 0 ? '+' : '-', (int)Math.round(Math.abs(f[1]*power)),
-//                f[2]*power > 0 ? '+' : '-', (int)Math.round(Math.abs(f[2]*power)));
-//
-//        if( com != null ) {
-//            com.write(command);
-//        }
-//
-//        Log.d("Moved", angle + " " + power+"=>" + f[0] + " " + f[1] + " " +f[2]);
-//        Log.d("Command", command);
+        if(angle < 0)
+            angle = Math.PI + Math.abs(angle);
+        else
+            angle = Math.abs(Math.PI - angle);
+
+        String command = command(f(Math.cos(angle), Math.sin(angle)));
+        Log.wtf("command", command );
+
+        if( com != null ) {
+            com.write(command);
+        }
     }
 
     @Override
@@ -170,25 +182,4 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
     public void onDoubleTap() {
 
     }
-
-    private String command(double[] f) {
-        f[0] = 255/0.68 * f[0];
-        f[1] = 255/0.68 * f[1];
-        f[2] = 255/0.68 * f[2];
-
-        String command = String.format("%c%03d %c%03d %c%03d",
-                f[0] > 0 ? '+' : '-',
-                (int)Math.round(Math.abs(f[0])),
-
-                f[1] > 0 ? '+' : '-',
-                (int)Math.round(Math.abs(f[1])),
-
-                f[2] > 0 ? '+' : '-',
-                (int)Math.round(Math.abs(f[2])));
-        
-        return  command;
-    }
-
-
-
 }
