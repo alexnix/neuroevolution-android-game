@@ -6,16 +6,17 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
-import com.erz.joysticklibrary.JoyStick;
 import com.neuroevolution.robot.simulation.bluetooth_specifics.CommunicationThread;
 import com.neuroevolution.robot.simulation.core.MyApplication;
 
 import java.io.IOException;
 
-public class ManualControlActivity extends AppCompatActivity implements JoyStick.JoyStickListener {
+public class ManualControlActivity extends AppCompatActivity {
 
     private CommunicationThread com;
+
     private double[][] m = {
             { 0.58, -0.33, 0.33},
             {-0.58, -0.33, 0.33},
@@ -57,10 +58,7 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
         com = app.getCom();
         if (com != null) com.start();
 
-        JoyStick joyStick = (JoyStick) findViewById(R.id.joy1);
-        joyStick.setListener(this);
-
-        Button up = (Button) findViewById(R.id.up);
+        ImageView up = (ImageView) findViewById(R.id.up);
         up.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -81,7 +79,7 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
             }
         });
 
-        Button down = (Button) findViewById(R.id.down);
+        ImageView down = (ImageView) findViewById(R.id.down);
         down.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -102,7 +100,7 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
             }
         });
 
-        Button left = (Button) findViewById(R.id.left);
+        ImageView left = (ImageView) findViewById(R.id.left);
         left.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -123,7 +121,7 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
             }
         });
 
-        Button right = (Button) findViewById(R.id.right);
+        ImageView right = (ImageView) findViewById(R.id.right);
         right.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -144,6 +142,25 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
             }
         });
 
+        ImageView rotate = (ImageView) findViewById(R.id.rotate);
+        rotate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch ( motionEvent.getAction() ) {
+                    case MotionEvent.ACTION_DOWN:
+                        if( com != null )
+                            com.write("+255 +255 +255");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if( com != null )
+                            com.write("+000 +000 +000");
+                        break;
+                }
+                return true;
+            }
+        });
+
+
     }
 
     @Override
@@ -157,29 +174,4 @@ public class ManualControlActivity extends AppCompatActivity implements JoyStick
         }
     }
 
-
-    @Override
-    public void onMove(JoyStick joyStick, double angle, double power, int direction) {
-        if(angle < 0)
-            angle = Math.PI + Math.abs(angle);
-        else
-            angle = Math.abs(Math.PI - angle);
-
-        String command = command(f(Math.cos(angle), Math.sin(angle)));
-        Log.wtf("command", command );
-
-        if( com != null ) {
-            com.write(command);
-        }
-    }
-
-    @Override
-    public void onTap() {
-
-    }
-
-    @Override
-    public void onDoubleTap() {
-
-    }
 }

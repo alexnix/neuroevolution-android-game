@@ -145,7 +145,7 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
         Log.d("WORKS", "max: " + sum_max);
         tv.setText(String.valueOf(max_i + " : " + max_j + " => " + sum_max));
         if(sum_max > 6300) {
-            wv.loadUrl("javascript:compute(" +max_i/mWidth + ", " + max_j/mHeight + ")");
+            wv.loadUrl("javascript:compute(" +((max_i/mWidth) - 1/2) + ", " + max_j/mHeight + ")");
         } else {
             if( com != null ) {
                 com.write("+000 +000 +000");
