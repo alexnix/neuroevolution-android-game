@@ -149,7 +149,7 @@ public class ManualControlActivity extends AppCompatActivity {
                 switch ( motionEvent.getAction() ) {
                     case MotionEvent.ACTION_DOWN:
                         if( com != null )
-                            com.write("+255 +255 +255");
+                            com.write("+200 +200 +200");
                         break;
                     case MotionEvent.ACTION_UP:
                         if( com != null )

@@ -23,6 +23,7 @@ import com.neuroevolution.robot.simulation.bluetooth_specifics.CommunicationThre
 import com.neuroevolution.robot.simulation.core.CameraPreview;
 import com.neuroevolution.robot.simulation.core.MyApplication;
 
+import static android.R.attr.max;
 import static com.neuroevolution.robot.simulation.TrainingActivity.GENERATION;
 
 // Camera functions inspired from https://developer.android.com/guide/topics/media/camera.html
@@ -142,10 +143,12 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
             }
         }
 
-        Log.d("WORKS", "max: " + sum_max);
         tv.setText(String.valueOf(max_i + " : " + max_j + " => " + sum_max));
         if(sum_max > 6300) {
-            wv.loadUrl("javascript:compute(" +((max_i/mWidth) - 1/2) + ", " + max_j/mHeight + ")");
+            Log.wtf("nn", max_j + " " + mWidth + " ; " + max_i + " " + mHeight);
+
+            Log.d("nn input", (((float)max_j/mWidth) - 0.5) + ", " + (1 - ((float)max_i/mHeight)));
+            wv.loadUrl("javascript:compute(" +( 1 - ((float)max_j/mWidth) - 0.5) + ", " + ( 1 - ((float)max_i/mHeight) ) + ")");
         } else {
             if( com != null ) {
                 com.write("+000 +000 +000");
@@ -224,7 +227,7 @@ public class AutoControlActivity extends AppCompatActivity implements Camera.Pre
 
     @JavascriptInterface
     public void move(int ax, int ay) {
-        Toast.makeText(this, ax+ " " + ay, Toast.LENGTH_SHORT).show();
+        Log.d("nn acc", ax + " " + ay);
         String command = command(f(ax, ay));
         Log.wtf("command", command );
 
